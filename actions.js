@@ -39,6 +39,23 @@ function editComment(text) {
 }
 
 
+const DELETE_COMMENT = 'EDIT_COMMENT';
+
+{
+    type: DELETE_COMMENT,
+    id: 16,
+    text: 'Delete'
+}
+
+function deleteComment(text) {
+    return {
+        type: DELETE_COMMENT,
+        text,
+        id: uuid.v4()
+    }
+}
+
+
 const THUMB_UP_COMMENT = 'THUMB_UP_COMMENT';
 
 {
