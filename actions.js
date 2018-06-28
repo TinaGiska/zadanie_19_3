@@ -1,88 +1,65 @@
 
 import uuid from uuid;
 
-
 const ADD_COMMENT = 'ADD_COMMENT';
+const REMOVE_COMMENT = 'REMOVE_COMMENT';
+const EDIT_COMMENT = 'EDIT_COMMENT';
+const THUMB_UP_COMMENT = 'THUMB_UP_COMMENT';
+const THUMB_DOWN_COMMENT = 'THUMB_DOWN_COMMENT';
 
-{
-    type: ADD_COMMENT,
-    text: 'My first comment !'
-}
 
-function addComment(text) {
-    return {
-        type: ADD_COMMENT,
-        text,
-        id: uuid.v4()
-    }
-}
+const addComment = text => {
+	return {
+		type: ADD_COMMENT,
+		text,
+		id: uuid.v4()
+	}
+};
 
 const boundAddComment = text => dispatch(addComment(text));
 
-boundAddComment('kolejny komentarz!');
 
 
-const EDIT_COMMENT = 'EDIT_COMMENT';
+const editComment = text => {
+	return {
+		type: EDIT_COMMENT,
+		text,
+		id
+	}
+};
 
-{
-    type: EDIT_COMMENT,
-    id: 18,
-    text: 'Edytion'
-}
-
-function editComment(text) {
-    return {
-        type: EDIT_COMMENT,
-        text,
-        id: uuid.v4()
-    }
-}
+const boundEditComment = (text, id) => dispatch(editComment(text, id));
 
 
-const DELETE_COMMENT = 'EDIT_COMMENT';
 
-{
-    type: DELETE_COMMENT,
-    id: 16,
-    text: 'Delete'
-}
+const removeComment = id => {
+	return {
+		type: REMOVE_COMMENT,
+		id
+	}
+};
 
-function deleteComment(text) {
-    return {
-        type: DELETE_COMMENT,
-        text,
-        id: uuid.v4()
-    }
-}
+const boundRemoveComment = id => dispatch(removeComment(id));
 
 
-const THUMB_UP_COMMENT = 'THUMB_UP_COMMENT';
-
-{
-    type: THUMB_UP_COMMENT,
-    text: 'fa fa-thumbs-o-up'
-}
-
-function thumbUp(text) {
+const thumbUpComment = (id, likes) => {
     return {
         type: THUMB_UP_COMMENT,
-        text,
-        id: uuid.v4()
+        id,
+        likes: likes + 1
     }
-}
+};
+
+const boundThumbUpComment = (id, likes) => dispatch(thumbUpComment(id, likes));
 
 
-const THUMB_DOWN_COMMENT = 'THUMB_DOWN_COMMENT';
 
-{
-    type: THUMB_DOWN_COMMENT,
-    text: 'fa fa-thumbs-o-down'
-}
-
-function thumbDown(text) {
+const thumbDownComment = (id, dislikes) => {
     return {
         type: THUMB_DOWN_COMMENT,
-        text,
-        id: uuid.v4()
+        id,
+        dislikes: dislikes + 1
     }
 }
+
+const boundThumbDownComment = (id, likes) => dispatch(thumbDownComment(id, dislikes));
